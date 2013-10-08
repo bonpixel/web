@@ -16,9 +16,9 @@ define(['jquery'], ($) ->
 	)();
 
 	$('body').on 'mousewheel', (e)->
-		e.preventDefault();
+		# e.preventDefault();
 		console.log(e.originalEvent.wheelDelta)
-		scrollHandler($('.content'), e.originalEvent.wheelDelta)
+		scrollHandler($('.hero-unit'), e.originalEvent.wheelDelta)
 
 	$('.up, .down').on 'click', (e) ->
 		adjustNumbers(e);
@@ -30,13 +30,16 @@ define(['jquery'], ($) ->
 			console.log('down')
 
 	scrollHandler = (target, delta)->
+		current = parseInt(target.css('height'), 10)
+		newheight = current + delta + 'px'
+		console.log('newheight', newheight)
+		console.log((current + delta >= 600))
 
-		current = parseInt(target.css('top'), 10)
-		newposition = current + delta + 'px'
-		console.log(newposition)
+		if (current + delta >= 600)
+			return
 
 		target.css(
-			top: newposition
+			height: newheight
 		)
 
 
